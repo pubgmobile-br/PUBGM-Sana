@@ -12,6 +12,8 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-25SRF2NVP5');
+
+    console.log("Google Analytics carregado com sucesso!");
   </script>
 
   <style>
@@ -67,23 +69,30 @@
     }
 
     function openApp() {
+      console.log("Iniciando tentativa de abrir o aplicativo...");
+
       if (isAndroid()) {
         window.location.href = "intent://launch/#Intent;package=com.tencent.ig;scheme=pubgmobile;end";
         setTimeout(() => {
+          console.log("Redirecionando para Play Store...");
           window.location.href = "https://play.google.com/store/apps/details?id=com.tencent.ig";
-        }, 2500);
+        }, 3000); // 3 segundos
       } else if (isIOS()) {
         window.location.href = "pubgmobile://";
         setTimeout(() => {
+          console.log("Redirecionando para App Store...");
           window.location.href = "https://apps.apple.com/app/id1330123889";
-        }, 2500);
+        }, 3000);
       } else {
-        window.location.href = "https://pubgmobile.live/appdownload";
+        console.log("Dispositivo não identificado. Redirecionando para o site oficial.");
+        setTimeout(() => {
+          window.location.href = "https://pubgmobile.live/appdownload";
+        }, 3000);
       }
     }
 
-    // Tenta abrir automaticamente
-    openApp();
+    // Tenta abrir automaticamente com delay de coleta
+    setTimeout(openApp, 1000);
 
     // Botão manual
     document.getElementById('openAppBtn').addEventListener('click', function(e) {
